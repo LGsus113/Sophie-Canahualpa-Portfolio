@@ -1,0 +1,33 @@
+---
+import "../styles/global.css";
+import type { LayoutProps } from "@src/TypeScript/type";
+
+const {
+  title,
+  description,
+} = Astro.props as LayoutProps;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header id="home">
+      <slot name="header" />
+    </header>
+    <main id="mainSection" class="w-10/12 xl:w-280">
+      <slot name="main" />
+    </main>
+    <footer class="w-full h-auto flex items-center justify-center">
+      <slot name="footer" />
+    </footer>
+  </body>
+</html>

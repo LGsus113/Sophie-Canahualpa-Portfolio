@@ -1,0 +1,54 @@
+---
+import uno from "@src/assets/carousel/image-1.webp";
+import dos from "@src/assets/carousel/image-2.webp";
+import tres from "@src/assets/carousel/image-3.webp";
+import cuatro from "@src/assets/carousel/image-4.webp";
+
+const images = [uno, dos, tres, cuatro];
+---
+
+<section class="relative w-full h-screen overflow-hidden">
+  {
+    images.map((img, index) => (
+      <img
+        src={img.src}
+        alt={`Slide ${index + 1}`}
+        class={`slide absolute object-cover object-center ${
+          index === 0 ? "is-active" : ""
+        }`}
+        loading={index === 0 ? "eager" : "lazy"}
+        decoding="async"
+      />
+    ))
+  }
+  <div class="absolute size-full z-1 flex items-end justify-center">
+    <div
+      class="w-355 pb-10 flex flex-col gap-2 font-light text-yellow-50 font-playfair"
+    >
+      <h2 class="text-4xl drop-shadow-md drop-shadow-black">
+        Diseño de Interiores <span class="font-serif">&</span> Visualización 3D
+      </h2>
+      <p class="text-xl drop-shadow-md drop-shadow-black">
+        Diseñamos espacios que se sienten antes de construirse.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initCarousel } from "@src/TypeScript/carousel-home";
+  initCarousel(".slide", 5000);
+</script>
+
+<style>
+  .slide {
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    will-change: opacity;
+  }
+
+  .slide.is-active {
+    opacity: 1;
+    z-index: 1;
+  }
+</style>

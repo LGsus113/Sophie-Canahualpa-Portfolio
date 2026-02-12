@@ -1,0 +1,35 @@
+---
+import type { ItemsProps } from "@src/TypeScript/type";
+const { items, vertical } = Astro.props as ItemsProps;
+---
+
+<ul
+  class={`flex ${vertical ? "flex-col" : "flex-row"} gap-4 text-base font-semibold`}
+>
+  {
+    items.map((item) => {
+      const ImageComponent = item.image;
+
+      return (
+        <li
+          data-list-linkers
+          class="flex text-white
+                 hover:text-yellow-50
+                 transition-all duration-300"
+        >
+          <a
+            href={item.href}
+            target={item.target ?? "_self"}
+            class="w-full flex items-center gap-2 px-4 py-2 drop-shadow-md drop-shadow-black
+                   active:scale-85 transition-transform duration-200"
+          >
+            {ImageComponent && (
+              <ImageComponent class="size-4 xl:size-6 text-current" />
+            )}
+            <span class="text-2xl tracking-widest font-playfair">{item.label}</span>
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>
