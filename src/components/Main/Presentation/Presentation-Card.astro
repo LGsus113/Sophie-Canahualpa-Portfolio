@@ -1,0 +1,15 @@
+---
+import ImageCarousel from "@src/components/utils/ImageCarousel.astro";
+
+import DUno from "@src/assets/carousel-presentation/design 1.webp";
+import DDos from "@src/assets/carousel-presentation/design 2.webp";
+import DTres from "@src/assets/carousel-presentation/design 3.webp";
+import DCuatro from "@src/assets/carousel-presentation/design 4.webp";
+
+const imagesD = [DUno, DDos, DTres, DCuatro];
+---
+
+<section class="w-full h-dvh flex items-center">
+  <div class="w-1/2">hola</div>
+  <ImageCarousel images={imagesD} interval={3000} pauseOnHover={true} className="w-1/2 h-dvh" />
+</section>

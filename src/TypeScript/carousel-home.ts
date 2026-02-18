@@ -1,45 +1,78 @@
-import { $, $$ } from "@src/TypeScript/dom-selector";
+function setupCarousel(container: HTMLElement) {
+  const slides = container.querySelectorAll<HTMLElement>(".carousel-slide");
 
-function activeCarousel(selector = ".slide", interval = 4000) {
-  const slides = Array.from($$<HTMLImageElement>(selector));
+  const interval = Number(container.getAttribute("data-interval")) || 4000;
+  const pauseOnHover = container.getAttribute("data-pause-hover") === "true";
 
   if (!slides.length) return;
 
   let current = 0;
-  let timer: number | undefined;
-
-  const show = (index: number) => {
-    slides.forEach((slide, i) => {
-      slide.classList.toggle("is-active", i === index);
-      slide.classList.toggle("opacity-100", i === index);
-    });
-  };
+  let timer: number | null = null;
+  let isVisible = true;
+  let isHovered = false;
 
   const start = () => {
-    stop();
+    if (timer || !isVisible || (pauseOnHover && isHovered)) return;
+
     timer = window.setInterval(() => {
+      slides[current].classList.remove("is-active");
       current = (current + 1) % slides.length;
-      show(current);
+      slides[current].classList.add("is-active");
     }, interval);
   };
 
   const stop = () => {
-    if (timer) {
+    if (timer !== null) {
       clearInterval(timer);
-      timer = undefined;
+      timer = null;
     }
   };
 
-  show(current);
+  if (pauseOnHover) {
+    container.addEventListener("mouseenter", () => {
+      isHovered = true;
+      stop();
+    });
+
+    container.addEventListener("mouseleave", () => {
+      isHovered = false;
+      start();
+    });
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stop();
+    } else {
+      start();
+    }
+  });
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      isVisible = entry.isIntersecting;
+
+      if (isVisible) {
+        start();
+      } else {
+        stop();
+      }
+    },
+    { threshold: 0.1 },
+  );
+
+  observer.observe(container);
+
   start();
 }
 
-export function initCarousel(selector = ".slide", interval = 4000) {
-  document.addEventListener("DOMContentLoaded", () =>
-    activeCarousel(selector, interval),
-  );
+function initAllCarousels() {
+  const containers = document.querySelectorAll<HTMLElement>("[data-carousel]");
 
-  document.addEventListener("astro:page-load", () =>
-    activeCarousel(selector, interval),
-  );
+  containers.forEach(setupCarousel);
+}
+
+export function initCarousel() {
+  document.addEventListener("DOMContentLoaded", initAllCarousels);
+  document.addEventListener("astro:page-load", initAllCarousels);
 }

@@ -7,7 +7,7 @@ import Lumea from "@src/assets/Lumea-logo.png";
 const data = [
   {
     label: "Home",
-    href: "#home",
+    href: "#top",
   },
   {
     label: "Bio",
@@ -30,15 +30,21 @@ const data = [
 
 <section
   data-container-linkers
-  class="fixed top-0 left-1/2 -translate-x-1/2 w-11/12 2xl:w-355 h-auto flex items-center justify-between py-4 z-100 transition-all duration-300 ease-in-out"
+  class="nav-container fixed top-0 left-1/2 -translate-x-1/2 w-full h-auto flex items-center justify-center py-4 z-100 transition-all duration-300 ease-in-out"
 >
-  <div class="w-64 h-auto drop-shadow-md drop-shadow-black ">
-    <img src={Lumea.src} alt="Logo de Portafolio" class="object-contain object-center size-full" />
-  </div>
+  <div class="w-11/12 2xl:w-355 flex items-center justify-between">
+    <div class="w-64 h-auto drop-shadow-md drop-shadow-black">
+      <img
+        src={Lumea.src}
+        alt="Logo de Portafolio"
+        class="object-contain object-center size-full"
+      />
+    </div>
 
-  <nav class="hidden lg:block mt-0 md:ml-10">
-    <ListNav items={data} />
-  </nav>
+    <nav class="hidden lg:block mt-0 md:ml-10">
+      <ListNav items={data} />
+    </nav>
+  </div>
 
   <Hovered />
 </section>

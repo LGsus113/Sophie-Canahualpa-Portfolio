@@ -1,7 +1,10 @@
 ---
-import CarouselImages from "@src/components/Header/Components/CarouselImages.astro";
 import Nav from "@src/components/Header/Components/Nav.astro";
 ---
 
-<CarouselImages />
 <Nav />
+
+<script>
+  import { initObserver } from "@src/TypeScript/observer-nav";
+  initObserver();
+</script>

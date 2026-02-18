@@ -20,10 +20,10 @@ const {
     <title>{title}</title>
   </head>
   <body>
-    <header id="home">
+    <header>
       <slot name="header" />
     </header>
-    <main id="mainSection" class="w-10/12 xl:w-280">
+    <main id="mainSection" class="flex flex-col justify-center">
       <slot name="main" />
     </main>
     <footer class="w-full h-auto flex items-center justify-center">

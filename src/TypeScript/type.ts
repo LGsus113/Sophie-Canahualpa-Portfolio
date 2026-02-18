@@ -18,3 +18,11 @@ export interface ItemsProps {
   items: ListProps[];
   vertical?: boolean;
 }
+
+export interface ImageCarousel {
+  images: { src: string }[];
+  selector?: string;
+  interval?: number;
+  className?: string;
+  pauseOnHover? : boolean,
+}
