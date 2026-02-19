@@ -21,6 +21,10 @@
     --nav-opacity: 0.05;
     --nav-blur: 4px;
   }
+  .shadow-block {
+    filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, var(--shadow-strength, 0.4)));
+    transition: filter 300ms ease;
+  }
 }
 
 html {

@@ -25,8 +25,15 @@ function ObserverNav() {
       const opacity = adjustedProgress * maxOpacity;
       const blur = adjustedProgress * maxBlur;
 
+      const initialShadow = 0.9;
+      const minShadow = 0.35;
+
+      const shadowStrength =
+        initialShadow - adjustedProgress * (initialShadow - minShadow);
+
       nav.style.setProperty("--nav-opacity", `${opacity}`);
       nav.style.setProperty("--nav-blur", `${blur}px`);
+      nav.style.setProperty("--shadow-strength", `${shadowStrength}`);
 
       if (!entry.isIntersecting) {
         nav.classList.add("nav-scrolled");
