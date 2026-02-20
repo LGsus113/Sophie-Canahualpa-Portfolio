@@ -1,0 +1,55 @@
+---
+import Logo from "@src/assets/svg/logo.astro";
+
+import Branding from "@src/assets/galery/branding.webp";
+import Tendencia from "@src/assets/galery/tendence.webp";
+import Ejecucion from "@src/assets/galery/ejecucion.webp";
+import Web from "@src/assets/galery/web.webp";
+
+const images = [Branding, Web, Tendencia, Ejecucion];
+---
+
+<div class="min-w-full h-full flex flex-col">
+  <section class="w-full h-auto flex justify-center items-center">
+    <div class="w-3/4 h-full pt-40 flex justify-between items-center">
+      <h1 class="text-5xl text-red-950 font-playfair">NOS CARACTERIZA</h1>
+      <Logo class="size-28 text-red-950" />
+    </div>
+  </section>
+  <section class="w-full h-full pt-px pb-10 flex justify-center items-center">
+    <div class="w-2/3 h-150 flex gap-5 overflow-hidden rounded-2xl">
+      {
+        images.map((img, index) => (
+          <article class="group relative flex-1 overflow-hidden rounded-2xl transition-all duration-500 ease-in-out hover:flex-3">
+            <img
+              src={img.src}
+              alt={`Caracteristica ${index}`}
+              class="absolute inset-0 w-full h-full object-cover"
+            />
+
+            <div class="absolute inset-0 bg-black/40" />
+
+            <div class="absolute bottom-6 left-6 z-10">
+              <h2 class="text-white text-2xl font-semibold">
+                {index === 0 && "Branding"}
+                {index === 1 && "Desarrollo Web"}
+                {index === 2 && "Tendencia"}
+                {index === 3 && "Asesoría"}
+              </h2>
+            </div>
+
+            <div class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-all duration-500 group-hover:opacity-100">
+              <p class="text-white text-center text-xl px-8 max-w-sm">
+                {index === 0 && "Diseño y Orientación de Marca"}
+                {index === 1 &&
+                  "Creamos y diseñamos tu pagina web desde cero y a tu medida"}
+                {index === 2 && "Manejo de tendencias y Softwares actualizados"}
+                {index === 3 && "Guía en ejecución de proyectos"}
+              </p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</div>

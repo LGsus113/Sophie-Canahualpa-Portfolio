@@ -25,6 +25,9 @@
     filter: drop-shadow(4px 4px 2px rgba(0, 0, 0, var(--shadow-strength, 0.4)));
     transition: filter 300ms ease;
   }
+  .button-slide {
+    @apply absolute top-1/2 -translate-y-1/2 z-10 text-white text-3xl hover:scale-110 active:scale-90 transition-all duration-150 ease-in-out rounded-full bg-black/10 backdrop-blur-lg border border-white hover:cursor-pointer
+  }
 }
 
 html {
